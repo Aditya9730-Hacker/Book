@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub - Marketing & Sales Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --warning: #ffcc00;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-light {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-light:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Books Section */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .book-info {
+            padding: 20px;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .book-author {
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        .book-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image {
+            height: 180px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .blog-excerpt {
+            color: var(--gray);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Success Stories */
+        .success-stories {
+            background-color: var(--light-gray);
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .story-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .story-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 2rem;
+        }
+
+        .story-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .story-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Admin Panel Styles */
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-menu {
+            list-style: none;
+        }
+
+        .admin-menu li {
+            margin-bottom: 5px;
+        }
+
+        .admin-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .admin-menu a:hover, .admin-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .admin-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .admin-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #3d8b40;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background-color: #e6b800;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Blog Post Modal */
+        .blog-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .blog-modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .blog-modal-meta {
+            color: var(--gray);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .blog-modal-image {
+            width: 100%;
+            height: 300px;
+            background-color: var(--light-gray);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            border-radius: 8px;
+        }
+
+        .blog-modal-body {
+            line-height: 1.8;
+        }
+
+        .blog-modal-body p {
+            margin-bottom: 15px;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .checkout-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .checkout-book {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .checkout-book-image {
+            width: 80px;
+            height: 100px;
+            background-color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .checkout-book-info {
+            flex: 1;
+        }
+
+        .checkout-book-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .checkout-book-author {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .checkout-book-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .checkout-summary {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            border-top: 1px solid var(--gray);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        /* Success Photo Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 150px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        /* Order Edit Modal */
+        .order-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background-color: #cce7ff;
+            color: #004085;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                width: 200px;
+            }
+            
+            .admin-content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu, .auth-buttons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .admin-container {
+                flex-direction: column;
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+
+            .blog-modal-content, .checkout-modal-content {
+                padding: 20px;
+            }
+
+            .blog-modal-title {
+                font-size: 1.5rem;
+            }
+
+            .checkout-book {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .checkout-book-image {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .books-grid, .blog-grid, .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-modal-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .payment-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- User Website -->
+    <div id="user-website">
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <a href="#" class="logo">
+                        <i class="fas fa-book"></i>
+                        BookHub
+                    </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#success">Success Stories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="#" class="btn btn-outline" id="admin-login-btn">Admin Login</a>
+                        <a href="#" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="container">
+                <h1>Transform Your Business with Our Marketing Books</h1>
+                <p>Discover powerful strategies, proven techniques, and insider secrets to grow your business and achieve remarkable success.</p>
+                <div class="hero-buttons">
+                    <a href="#books" class="btn btn-light">Explore Books</a>
+                    <a href="#blog" class="btn btn-outline">Read Blog</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="books">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Books</h2>
+                    <p>Explore our collection of marketing and business books designed to help you succeed.</p>
+                </div>
+                <div class="books-grid" id="books-container">
+                    <!-- Books will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Latest Blog Posts</h2>
+                    <p>Stay updated with the latest marketing trends, tips, and insights.</p>
+                </div>
+                <div class="blog-grid" id="blog-container">
+                    <!-- Blog posts will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="success" class="success-stories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Success Stories</h2>
+                    <p>See how our books have helped businesses achieve remarkable growth.</p>
+                </div>
+                <div class="stories-grid" id="stories-container">
+                    <!-- Success stories will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>BookHub</h3>
+                        <p>Your trusted partner for business growth through powerful marketing resources and books.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#books">Books</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#success">Success Stories</a></li>
+                            <li><a href="#about">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Shipping Policy</a></li>
+                            <li><a href="#">Returns & Refunds</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Business Ave, City, State 12345</li>
+                            <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-envelope"></i> info@bookhub.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 BookHub. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Admin Login</h2>
+                <p>Access the admin panel with your credentials</p>
+            </div>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" id="admin-username" placeholder="Enter admin username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="admin-password" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div id="login-error" style="color: var(--danger); margin-top: 15px; display: none;">
+                Invalid credentials. Please try again.
+            </div>
+            <div style="margin-top: 20px; font-size: 0.9rem; color: var(--gray); text-align: center;">
+                <p>Demo credentials:</p>
+                <p>Username: <strong>admin</strong></p>
+                <p>Password: <strong>password123</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Post Modal -->
+    <div id="blog-post-modal" class="modal">
+        <div class="blog-modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="blog-modal-header">
+                <h2 class="blog-modal-title" id="blog-modal-title">Blog Post Title</h2>
+                <div class="blog-modal-meta">
+                    <span id="blog-modal-date">June 15, 2023</span>
+                    <span id="blog-modal-read-time">5 min read</span>
+                </div>
+            </div>
+            <div class="blog-modal-image">
+                <i class="fas fa-image fa-5x"></i>
+            </div>
+            <div class="blog-modal-body" id="blog-modal-body">
+                <!-- Blog content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="checkout-modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="checkout-header">
+                <h2 class="checkout-title">Checkout</h2>
+            </div>
+            
+            <div id="checkout-book-info">
+                <!-- Book info will be inserted here -->
+            </div>
+            
+            <div class="checkout-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="checkout-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="checkout-shipping">$5.00</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total:</span>
+                    <span id="checkout-total">$0.00</span>
+                </div>
+            </div>
+            
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="customer-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="customer-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="customer-phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Shipping Address</label>
+                    <textarea class="form-control" id="customer-address" placeholder="Enter your complete shipping address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <div class="payment-options">
+                        <div class="payment-option selected" data-method="card">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Credit/Debit Card</span>
+                        </div>
+                        <div class="payment-option" data-method="google-pay">
+                            <i class="fab fa-google-pay"></i>
+                            <span>Google Pay</span>
+                        </div>
+                        <div class="payment-option" data-method="cod">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Cash on Delivery</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="card-payment-fields" style="display: block;">
+                    <div class="form-group">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="card-cvv" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div id="order-success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Order Successful!</h2>
+                <p>Thank you for your purchase. Your order has been placed successfully.</p>
+                <p>Order ID: <strong id="success-order-id">#ORD-001</strong></p>
+                <p>We will send a confirmation email shortly.</p>
+                <button class="btn btn-primary" id="continue-shopping-btn" style="margin-top: 20px;">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Edit Modal -->
+    <div id="order-edit-modal" class="modal">
+        <div class="order-modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Order</h2>
+            </div>
+            <form id="order-edit-form">
+                <input type="hidden" id="edit-order-id">
+                <div class="form-group">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" class="form-control" id="edit-customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Order Date</label>
+                    <input type="date" class="form-control" id="edit-order-date" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="edit-order-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-control" id="edit-order-status" required>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Order</button>
+                    <button type="button" class="btn btn-danger" id="delete-order-btn">Delete Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel (initially hidden) -->
+    <div id="admin-panel" style="display: none;">
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <div class="admin-logo">
+                    <h2><i class="fas fa-book"></i> BookHub Admin</h2>
+                </div>
+                <ul class="admin-menu">
+                    <li><a href="#" class="active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" data-tab="books"><i class="fas fa-book"></i> Books</a></li>
+                    <li><a href="#" data-tab="blog"><i class="fas fa-blog"></i> Blog Posts</a></li>
+                    <li><a href="#" data-tab="success"><i class="fas fa-images"></i> Success Photos</a></li>
+                    <li><a href="#" data-tab="orders"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="#" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#" id="admin-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+            <div class="admin-content">
+                <!-- Dashboard Tab -->
+                <div class="admin-tab" id="dashboard-tab">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Dashboard</h1>
+                        <div class="admin-user">
+                            Welcome, Admin <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Quick Stats</h2>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                            <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 8px;">
+                                <h3 id="total-books">0</h3>
+                                <p>Total Books</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 8px;">
+                                <h3 id="total-blogs">0</h3>
+                                <p>Blog Posts</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 8px;">
+                                <h3 id="total-orders">0</h3>
+                                <p>Total Orders</p>
+                            </div>
+                            <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 8px;">
+                                <h3 id="total-revenue">$0</h3>
+                                <p>Total Revenue</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books Tab -->
+                <div class="admin-tab" id="books-tab" style="display: none;">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Manage Books</h1>
+                        <button class="btn btn-primary" id="add-book-btn">Add New Book</button>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Books List</h2>
+                        <div class="table-responsive">
+                            <table class="table" id="books-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="books-table-body">
+                                    <!-- Books will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="admin-card" id="book-form-card" style="display: none;">
+                        <h2 id="book-form-title">Add New Book</h2>
+                        <form id="book-form">
+                            <input type="hidden" id="book-id">
+                            <div class="form-group">
+                                <label class="form-label">Book Title</label>
+                                <input type="text" class="form-control" id="book-title" placeholder="Enter book title" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Author</label>
+                                <input type="text" class="form-control" id="book-author" placeholder="Enter author name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-control" id="book-price" placeholder="Enter price" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" id="book-description" placeholder="Enter book description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Book Cover</label>
+                                <input type="file" class="form-control" id="book-cover">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="book-submit-btn">Add Book</button>
+                            <button type="button" class="btn btn-outline" id="cancel-book-btn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Blog Tab -->
+                <div class="admin-tab" id="blog-tab" style="display: none;">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Manage Blog Posts</h1>
+                        <button class="btn btn-primary" id="add-blog-btn">Add New Post</button>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Blog Posts</h2>
+                        <div class="table-responsive">
+                            <table class="table" id="blog-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Read Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blog-table-body">
+                                    <!-- Blog posts will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="admin-card" id="blog-form-card" style="display: none;">
+                        <h2 id="blog-form-title">Add New Blog Post</h2>
+                        <form id="blog-form">
+                            <input type="hidden" id="blog-id">
+                            <div class="form-group">
+                                <label class="form-label">Post Title</label>
+                                <input type="text" class="form-control" id="blog-title" placeholder="Enter post title" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Content</label>
+                                <textarea class="form-control" id="blog-content" placeholder="Enter post content" rows="10" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Read Time</label>
+                                <input type="text" class="form-control" id="blog-read-time" placeholder="e.g., 5 min read" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Featured Image</label>
+                                <input type="file" class="form-control" id="blog-image">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="blog-submit-btn">Publish Post</button>
+                            <button type="button" class="btn btn-outline" id="cancel-blog-btn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Success Stories Tab -->
+                <div class="admin-tab" id="success-tab" style="display: none;">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Manage Success Stories</h1>
+                        <button class="btn btn-primary" id="add-story-btn">Add New Story</button>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Success Stories</h2>
+                        <div class="gallery-grid" id="stories-gallery">
+                            <!-- Success stories will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <div class="admin-card" id="story-form-card" style="display: none;">
+                        <h2 id="story-form-title">Add Success Story</h2>
+                        <form id="story-form">
+                            <input type="hidden" id="story-id">
+                            <div class="form-group">
+                                <label class="form-label">Customer Name</label>
+                                <input type="text" class="form-control" id="story-name" placeholder="Enter customer name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Success Story</label>
+                                <textarea class="form-control" id="story-text" placeholder="Enter success story" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Customer Photo</label>
+                                <input type="file" class="form-control" id="story-photo">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="story-submit-btn">Add Story</button>
+                            <button type="button" class="btn btn-outline" id="cancel-story-btn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Orders Tab -->
+                <div class="admin-tab" id="orders-tab" style="display: none;">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Manage Orders</h1>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Recent Orders</h2>
+                        <div class="table-responsive">
+                            <table class="table" id="orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-table-body">
+                                    <!-- Orders will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="admin-tab" id="settings-tab" style="display: none;">
+                    <div class="admin-header">
+                        <h1 class="admin-title">Settings</h1>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>Payment Methods</h2>
+                        <p>Enable or disable payment methods for your store:</p>
+                        <div class="payment-options">
+                            <div class="payment-option selected" data-method="google-pay">
+                                <i class="fab fa-google-pay"></i>
+                                <span>Google Pay</span>
+                            </div>
+                            <div class="payment-option selected" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Credit/Debit Card</span>
+                            </div>
+                            <div class="payment-option selected" data-method="cod">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cash on Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data storage
+            let books = JSON.parse(localStorage.getItem('books')) || [
+                { id: 1, title: "Digital Marketing Mastery", author: "John Smith", price: 24.99, description: "Learn the secrets of digital marketing success." },
+                { id: 2, title: "Social Media Strategy", author: "Sarah Johnson", price: 19.99, description: "Master social media for business growth." },
+                { id: 3, title: "Content Marketing Secrets", author: "Michael Brown", price: 27.99, description: "Create content that converts." },
+                { id: 4, title: "SEO Optimization Guide", author: "Emily Davis", price: 22.99, description: "Rank higher in search results." }
+            ];
+
+            let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [
+                { 
+                    id: 1, 
+                    title: "10 Marketing Strategies for 2023", 
+                    date: "June 15, 2023", 
+                    readTime: "5 min read", 
+                    content: `<p>As we move further into 2023, the marketing landscape continues to evolve at a rapid pace. Businesses that stay ahead of the curve will reap significant rewards. Here are the top 10 marketing strategies that are dominating this year:</p>
+                        
+                        <h3>1. AI-Powered Personalization</h3>
+                        <p>Artificial intelligence is no longer a futuristic concept—it's here and transforming how we approach marketing. AI algorithms can analyze customer data to deliver hyper-personalized experiences at scale. From product recommendations to customized email campaigns, AI enables marketers to connect with customers on a deeper level.</p>
+                        
+                        <h3>2. Voice Search Optimization</h3>
+                        <p>With the growing popularity of smart speakers and voice assistants, optimizing for voice search is no longer optional. Voice searches tend to be longer and more conversational than text-based queries. Focus on natural language and question-based content to capture this growing segment.</p>
+                        
+                        <p>Implementing these strategies requires careful planning and execution, but the potential rewards make the effort worthwhile. Stay agile, test different approaches, and always keep your target audience at the center of your marketing efforts.</p>`
+                },
+                { 
+                    id: 2, 
+                    title: "Building a Brand Identity", 
+                    date: "June 10, 2023", 
+                    readTime: "7 min read", 
+                    content: `<p>A strong brand identity is more than just a memorable logo—it's the complete personality of your business and the promise you make to your customers. In today's crowded marketplace, a distinctive brand identity can be your most valuable asset. Here's how to build one that resonates:</p>
+                        
+                        <h3>Define Your Brand Strategy</h3>
+                        <p>Before you can build a visual identity, you need to define your brand strategy. This includes your mission, values, target audience, and unique selling proposition. Ask yourself: What problem does my business solve? Who are my ideal customers? What makes my solution different from competitors?</p>
+                        
+                        <h3>Develop Your Visual Identity</h3>
+                        <p>Your visual identity includes your logo, color palette, typography, and imagery. These elements should work together to create a cohesive look that reflects your brand personality.</p>
+                        
+                        <p>Building a strong brand identity takes time and effort, but the investment pays off in customer loyalty, brand recognition, and ultimately, business growth.</p>`
+                },
+                { 
+                    id: 3, 
+                    title: "The Power of Email Marketing", 
+                    date: "June 5, 2023", 
+                    readTime: "6 min read", 
+                    content: `<p>Despite the rise of new marketing channels, email continues to deliver exceptional return on investment. When executed correctly, email marketing can drive sales, build customer relationships, and increase brand loyalty. Here's how to maximize the power of your email campaigns:</p>
+                        
+                        <h3>Segmentation is Key</h3>
+                        <p>One-size-fits-all email blasts are no longer effective. Modern consumers expect personalized content that speaks to their specific needs and interests. Segment your email list based on factors like purchase history, engagement level, demographics, and behavior.</p>
+                        
+                        <h3>Automation for Efficiency and Relevance</h3>
+                        <p>Email automation allows you to send timely, relevant messages without manual intervention. Set up automated workflows for welcome series, abandoned cart reminders, post-purchase follow-ups, and re-engagement campaigns.</p>
+                        
+                        <p>Email marketing remains one of the most powerful tools in a marketer's arsenal. By focusing on segmentation, automation, mobile optimization, testing, and value-driven content, you can build an email program that drives meaningful business results.</p>`
+                }
+            ];
+
+            let successStories = JSON.parse(localStorage.getItem('successStories')) || [
+                { id: 1, name: "Alex Thompson", text: "The strategies in 'Digital Marketing Mastery' helped us increase our online sales by 300% in just 6 months!" },
+                { id: 2, name: "Maria Garcia", text: "Implementing the techniques from 'Social Media Strategy' transformed our engagement and grew our following by 500%." },
+                { id: 3, name: "James Wilson", text: "The insights from 'Content Marketing Secrets' helped us establish thought leadership in our industry and attract premium clients." }
+            ];
+
+            let orders = JSON.parse(localStorage.getItem('orders')) || [
+                { id: 1, customer: "John Doe", date: "2023-06-15", amount: 24.99, status: "completed" },
+                { id: 2, customer: "Jane Smith", date: "2023-06-14", amount: 47.98, status: "processing" },
+                { id: 3, customer: "Robert Johnson", date: "2023-06-13", amount: 19.99, status: "pending" }
+            ];
+
+            let paymentMethods = JSON.parse(localStorage.getItem('paymentMethods')) || {
+                "google-pay": true,
+                "card": true,
+                "cod": true
+            };
+
+            // Elements
+            const adminLoginBtn = document.getElementById('admin-login-btn');
+            const adminLoginModal = document.getElementById('admin-login-modal');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            const adminLoginForm = document.getElementById('admin-login-form');
+            const loginError = document.getElementById('login-error');
+            const adminPanel = document.getElementById('admin-panel');
+            const userWebsite = document.getElementById('user-website');
+            const adminLogoutBtn = document.getElementById('admin-logout');
+            const blogPostModal = document.getElementById('blog-post-modal');
+            const checkoutModal = document.getElementById('checkout-modal');
+            const orderSuccessModal = document.getElementById('order-success-modal');
+            const orderEditModal = document.getElementById('order-edit-modal');
+            const continueShoppingBtn = document.getElementById('continue-shopping-btn');
+            
+            // Admin tab elements
+            const adminTabs = document.querySelectorAll('.admin-tab');
+            const adminMenuLinks = document.querySelectorAll('.admin-menu a[data-tab]');
+            
+            // Book management elements
+            const addBookBtn = document.getElementById('add-book-btn');
+            const bookFormCard = document.getElementById('book-form-card');
+            const bookForm = document.getElementById('book-form');
+            const cancelBookBtn = document.getElementById('cancel-book-btn');
+            const booksTableBody = document.getElementById('books-table-body');
+            
+            // Blog management elements
+            const addBlogBtn = document.getElementById('add-blog-btn');
+            const blogFormCard = document.getElementById('blog-form-card');
+            const blogForm = document.getElementById('blog-form');
+            const cancelBlogBtn = document.getElementById('cancel-blog-btn');
+            const blogTableBody = document.getElementById('blog-table-body');
+            
+            // Success stories elements
+            const addStoryBtn = document.getElementById('add-story-btn');
+            const storyFormCard = document.getElementById('story-form-card');
+            const storyForm = document.getElementById('story-form');
+            const cancelStoryBtn = document.getElementById('cancel-story-btn');
+            const storiesGallery = document.getElementById('stories-gallery');
+            
+            // Orders elements
+            const ordersTableBody = document.getElementById('orders-table-body');
+            const orderEditForm = document.getElementById('order-edit-form');
+            const deleteOrderBtn = document.getElementById('delete-order-btn');
+            
+            // Checkout elements
+            const checkoutForm = document.getElementById('checkout-form');
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const cardPaymentFields = document.getElementById('card-payment-fields');
+            
+            // Current book being purchased
+            let currentBook = null;
+            
+            // Initialize the application
+            function init() {
+                renderBooks();
+                renderBlogPosts();
+                renderSuccessStories();
+                renderOrders();
+                updateStats();
+                
+                // Set up event listeners
+                setupEventListeners();
+            }
+            
+            // Set up all event listeners
+            function setupEventListeners() {
+                // Admin login
+                adminLoginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    adminLoginModal.style.display = 'flex';
+                });
+                
+                // Close modals
+                closeModalBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        adminLoginModal.style.display = 'none';
+                        blogPostModal.style.display = 'none';
+                        checkoutModal.style.display = 'none';
+                        orderSuccessModal.style.display = 'none';
+                        orderEditModal.style.display = 'none';
+                        loginError.style.display = 'none';
+                    });
+                });
+                
+                // Close modals when clicking outside
+                window.addEventListener('click', function(e) {
+                    if (e.target === adminLoginModal || e.target === blogPostModal || 
+                        e.target === checkoutModal || e.target === orderSuccessModal || 
+                        e.target === orderEditModal) {
+                        adminLoginModal.style.display = 'none';
+                        blogPostModal.style.display = 'none';
+                        checkoutModal.style.display = 'none';
+                        orderSuccessModal.style.display = 'none';
+                        orderEditModal.style.display = 'none';
+                        loginError.style.display = 'none';
+                    }
+                });
+                
+                // Admin login form submission
+                adminLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const username = document.getElementById('admin-username').value;
+                    const password = document.getElementById('admin-password').value;
+                    
+                    // Check credentials
+                    if (username === 'admin' && password === 'password123') {
+                        // Successful login
+                        adminLoginModal.style.display = 'none';
+                        userWebsite.style.display = 'none';
+                        adminPanel.style.display = 'block';
+                        loginError.style.display = 'none';
+                    } else {
+                        // Failed login
+                        loginError.style.display = 'block';
+                    }
+                });
+                
+                // Admin logout
+                adminLogoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    adminPanel.style.display = 'none';
+                    userWebsite.style.display = 'block';
+                });
+                
+                // Admin menu navigation
+                adminMenuLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const tabName = this.getAttribute('data-tab');
+                        
+                        // Update active menu item
+                        adminMenuLinks.forEach(item => item.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show selected tab
+                        adminTabs.forEach(tab => tab.style.display = 'none');
+                        document.getElementById(`${tabName}-tab`).style.display = 'block';
+                    });
+                });
+                
+                // Book management
+                addBookBtn.addEventListener('click', function() {
+                    document.getElementById('book-form-title').textContent = 'Add New Book';
+                    document.getElementById('book-submit-btn').textContent = 'Add Book';
+                    bookForm.reset();
+                    bookFormCard.style.display = 'block';
+                });
+                
+                bookForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const bookId = document.getElementById('book-id').value;
+                    const title = document.getElementById('book-title').value;
+                    const author = document.getElementById('book-author').value;
+                    const price = parseFloat(document.getElementById('book-price').value);
+                    const description = document.getElementById('book-description').value;
+                    
+                    if (bookId) {
+                        // Update existing book
+                        const index = books.findIndex(book => book.id == bookId);
+                        if (index !== -1) {
+                            books[index] = { id: parseInt(bookId), title, author, price, description };
+                        }
+                    } else {
+                        // Add new book
+                        const newId = books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1;
+                        books.push({ id: newId, title, author, price, description });
+                    }
+                    
+                    saveData('books', books);
+                    renderBooks();
+                    bookFormCard.style.display = 'none';
+                    updateStats();
+                });
+                
+                cancelBookBtn.addEventListener('click', function() {
+                    bookFormCard.style.display = 'none';
+                });
+                
+                // Blog management
+                addBlogBtn.addEventListener('click', function() {
+                    document.getElementById('blog-form-title').textContent = 'Add New Blog Post';
+                    document.getElementById('blog-submit-btn').textContent = 'Publish Post';
+                    blogForm.reset();
+                    blogFormCard.style.display = 'block';
+                });
+                
+                blogForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const blogId = document.getElementById('blog-id').value;
+                    const title = document.getElementById('blog-title').value;
+                    const content = document.getElementById('blog-content').value;
+                    const readTime = document.getElementById('blog-read-time').value;
+                    
+                    const currentDate = new Date();
+                    const dateString = currentDate.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
+                    
+                    if (blogId) {
+                        // Update existing blog post
+                        const index = blogPosts.findIndex(post => post.id == blogId);
+                        if (index !== -1) {
+                            blogPosts[index] = { 
+                                id: parseInt(blogId), 
+                                title, 
+                                date: dateString, 
+                                readTime, 
+                                content 
+                            };
+                        }
+                    } else {
+                        // Add new blog post
+                        const newId = blogPosts.length > 0 ? Math.max(...blogPosts.map(p => p.id)) + 1 : 1;
+                        blogPosts.push({ 
+                            id: newId, 
+                            title, 
+                            date: dateString, 
+                            readTime, 
+                            content 
+                        });
+                    }
+                    
+                    saveData('blogPosts', blogPosts);
+                    renderBlogPosts();
+                    blogFormCard.style.display = 'none';
+                    updateStats();
+                });
+                
+                cancelBlogBtn.addEventListener('click', function() {
+                    blogFormCard.style.display = 'none';
+                });
+                
+                // Success stories management
+                addStoryBtn.addEventListener('click', function() {
+                    document.getElementById('story-form-title').textContent = 'Add Success Story';
+                    document.getElementById('story-submit-btn').textContent = 'Add Story';
+                    storyForm.reset();
+                    storyFormCard.style.display = 'block';
+                });
+                
+                storyForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const storyId = document.getElementById('story-id').value;
+                    const name = document.getElementById('story-name').value;
+                    const text = document.getElementById('story-text').value;
+                    
+                    if (storyId) {
+                        // Update existing story
+                        const index = successStories.findIndex(story => story.id == storyId);
+                        if (index !== -1) {
+                            successStories[index] = { id: parseInt(storyId), name, text };
+                        }
+                    } else {
+                        // Add new story
+                        const newId = successStories.length > 0 ? Math.max(...successStories.map(s => s.id)) + 1 : 1;
+                        successStories.push({ id: newId, name, text });
+                    }
+                    
+                    saveData('successStories', successStories);
+                    renderSuccessStories();
+                    storyFormCard.style.display = 'none';
+                });
+                
+                cancelStoryBtn.addEventListener('click', function() {
+                    storyFormCard.style.display = 'none';
+                });
+                
+                // Order management
+                orderEditForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const orderId = document.getElementById('edit-order-id').value;
+                    const customer = document.getElementById('edit-customer-name').value;
+                    const date = document.getElementById('edit-order-date').value;
+                    const amount = parseFloat(document.getElementById('edit-order-amount').value);
+                    const status = document.getElementById('edit-order-status').value;
+                    
+                    const index = orders.findIndex(order => order.id == orderId);
+                    if (index !== -1) {
+                        orders[index] = { 
+                            id: parseInt(orderId), 
+                            customer, 
+                            date, 
+                            amount, 
+                            status 
+                        };
+                        
+                        saveData('orders', orders);
+                        renderOrders();
+                        orderEditModal.style.display = 'none';
+                        updateStats();
+                    }
+                });
+                
+                deleteOrderBtn.addEventListener('click', function() {
+                    const orderId = document.getElementById('edit-order-id').value;
+                    
+                    if (confirm('Are you sure you want to delete this order?')) {
+                        orders = orders.filter(order => order.id != orderId);
+                        saveData('orders', orders);
+                        renderOrders();
+                        orderEditModal.style.display = 'none';
+                        updateStats();
+                    }
+                });
+                
+                // Payment options in checkout
+                paymentOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Deselect all options
+                        paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                        // Select clicked option
+                        this.classList.add('selected');
+                        
+                        const method = this.getAttribute('data-method');
+                        
+                        // Show/hide card payment fields
+                        if (method === 'card') {
+                            cardPaymentFields.style.display = 'block';
+                        } else {
+                            cardPaymentFields.style.display = 'none';
+                        }
+                    });
+                });
+                
+                // Checkout form submission
+                checkoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const name = document.getElementById('customer-name').value;
+                    const email = document.getElementById('customer-email').value;
+                    const phone = document.getElementById('customer-phone').value;
+                    const address = document.getElementById('customer-address').value;
+                    const paymentMethod = document.querySelector('.payment-option.selected').getAttribute('data-method');
+                    
+                    // Create new order
+                    const newOrderId = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 1;
+                    const newOrder = {
+                        id: newOrderId,
+                        customer: name,
+                        date: new Date().toISOString().split('T')[0],
+                        amount: currentBook.price,
+                        status: 'pending',
+                        book: currentBook.title,
+                        email: email,
+                        phone: phone,
+                        address: address,
+                        paymentMethod: paymentMethod
+                    };
+                    
+                    orders.push(newOrder);
+                    saveData('orders', orders);
+                    
+                    // Show success message
+                    document.getElementById('success-order-id').textContent = `#ORD-${newOrderId.toString().padStart(3, '0')}`;
+                    checkoutModal.style.display = 'none';
+                    orderSuccessModal.style.display = 'flex';
+                    
+                    // Update stats
+                    updateStats();
+                });
+                
+                // Continue shopping button
+                continueShoppingBtn.addEventListener('click', function() {
+                    orderSuccessModal.style.display = 'none';
+                });
+            }
+            
+            // Render books on user website and admin panel
+            function renderBooks() {
+                const booksContainer = document.getElementById('books-container');
+                const booksTableBody = document.getElementById('books-table-body');
+                
+                // Clear existing content
+                booksContainer.innerHTML = '';
+                booksTableBody.innerHTML = '';
+                
+                // Render books on user website
+                books.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    bookCard.innerHTML = `
+                        <div class="book-image">
+                            <i class="fas fa-book-open fa-3x"></i>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">By ${book.author}</p>
+                            <p class="book-price">$${book.price.toFixed(2)}</p>
+                            <button class="btn btn-primary buy-now-btn" data-id="${book.id}">Buy Now</button>
+                        </div>
+                    `;
+                    booksContainer.appendChild(bookCard);
+                });
+                
+                // Render books in admin table
+                books.forEach(book => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>$${book.price.toFixed(2)}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-primary btn-sm edit-book" data-id="${book.id}">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-book" data-id="${book.id}">Delete</button>
+                        </td>
+                    `;
+                    booksTableBody.appendChild(row);
+                });
+                
+                // Add event listeners for buy now buttons
+                document.querySelectorAll('.buy-now-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const bookId = this.getAttribute('data-id');
+                        currentBook = books.find(b => b.id == bookId);
+                        
+                        if (currentBook) {
+                            // Update checkout modal with book info
+                            document.getElementById('checkout-book-info').innerHTML = `
+                                <div class="checkout-book">
+                                    <div class="checkout-book-image">
+                                        <i class="fas fa-book-open fa-2x"></i>
+                                    </div>
+                                    <div class="checkout-book-info">
+                                        <h3 class="checkout-book-title">${currentBook.title}</h3>
+                                        <p class="checkout-book-author">By ${currentBook.author}</p>
+                                        <p class="checkout-book-price">$${currentBook.price.toFixed(2)}</p>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            // Update prices
+                            document.getElementById('checkout-subtotal').textContent = `$${currentBook.price.toFixed(2)}`;
+                            document.getElementById('checkout-total').textContent = `$${(currentBook.price + 5).toFixed(2)}`;
+                            
+                            // Reset form
+                            checkoutForm.reset();
+                            
+                            // Show checkout modal
+                            checkoutModal.style.display = 'flex';
+                        }
+                    });
+                });
+                
+                // Add event listeners for edit and delete buttons
+                document.querySelectorAll('.edit-book').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const bookId = this.getAttribute('data-id');
+                        const book = books.find(b => b.id == bookId);
+                        
+                        if (book) {
+                            document.getElementById('book-form-title').textContent = 'Edit Book';
+                            document.getElementById('book-submit-btn').textContent = 'Update Book';
+                            document.getElementById('book-id').value = book.id;
+                            document.getElementById('book-title').value = book.title;
+                            document.getElementById('book-author').value = book.author;
+                            document.getElementById('book-price').value = book.price;
+                            document.getElementById('book-description').value = book.description;
+                            
+                            bookFormCard.style.display = 'block';
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-book').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const bookId = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to delete this book?')) {
+                            books = books.filter(book => book.id != bookId);
+                            saveData('books', books);
+                            renderBooks();
+                            updateStats();
+                        }
+                    });
+                });
+            }
+            
+            // Render blog posts on user website and admin panel
+            function renderBlogPosts() {
+                const blogContainer = document.getElementById('blog-container');
+                const blogTableBody = document.getElementById('blog-table-body');
+                
+                // Clear existing content
+                blogContainer.innerHTML = '';
+                blogTableBody.innerHTML = '';
+                
+                // Render blog posts on user website
+                blogPosts.forEach(post => {
+                    const blogCard = document.createElement('div');
+                    blogCard.className = 'blog-card';
+                    blogCard.innerHTML = `
+                        <div class="blog-image">
+                            <i class="fas fa-image fa-3x"></i>
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">${post.title}</h3>
+                            <p class="blog-excerpt">${post.content.replace(/<[^>]*>/g, '').substring(0, 150)}...</p>
+                            <div class="blog-meta">
+                                <span>${post.date}</span>
+                                <span>${post.readTime}</span>
+                            </div>
+                            <button class="btn btn-outline read-more-btn" data-blog-id="${post.id}">Read More</button>
+                        </div>
+                    `;
+                    blogContainer.appendChild(blogCard);
+                });
+                
+                // Render blog posts in admin table
+                blogPosts.forEach(post => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${post.title}</td>
+                        <td>${post.date}</td>
+                        <td>${post.readTime}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-primary btn-sm edit-blog" data-id="${post.id}">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-blog" data-id="${post.id}">Delete</button>
+                        </td>
+                    `;
+                    blogTableBody.appendChild(row);
+                });
+                
+                // Add event listeners for Read More buttons
+                document.querySelectorAll('.read-more-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const blogId = this.getAttribute('data-blog-id');
+                        const post = blogPosts.find(p => p.id == blogId);
+                        
+                        if (post) {
+                            document.getElementById('blog-modal-title').textContent = post.title;
+                            document.getElementById('blog-modal-date').textContent = post.date;
+                            document.getElementById('blog-modal-read-time').textContent = post.readTime;
+                            document.getElementById('blog-modal-body').innerHTML = post.content;
+                            
+                            blogPostModal.style.display = 'flex';
+                        }
+                    });
+                });
+                
+                // Add event listeners for edit and delete buttons
+                document.querySelectorAll('.edit-blog').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const blogId = this.getAttribute('data-id');
+                        const post = blogPosts.find(p => p.id == blogId);
+                        
+                        if (post) {
+                            document.getElementById('blog-form-title').textContent = 'Edit Blog Post';
+                            document.getElementById('blog-submit-btn').textContent = 'Update Post';
+                            document.getElementById('blog-id').value = post.id;
+                            document.getElementById('blog-title').value = post.title;
+                            document.getElementById('blog-content').value = post.content;
+                            document.getElementById('blog-read-time').value = post.readTime;
+                            
+                            blogFormCard.style.display = 'block';
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-blog').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const blogId = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to delete this blog post?')) {
+                            blogPosts = blogPosts.filter(post => post.id != blogId);
+                            saveData('blogPosts', blogPosts);
+                            renderBlogPosts();
+                            updateStats();
+                        }
+                    });
+                });
+            }
+            
+            // Render success stories on user website and admin panel
+            function renderSuccessStories() {
+                const storiesContainer = document.getElementById('stories-container');
+                const storiesGallery = document.getElementById('stories-gallery');
+                
+                // Clear existing content
+                storiesContainer.innerHTML = '';
+                storiesGallery.innerHTML = '';
+                
+                // Render success stories on user website
+                successStories.forEach(story => {
+                    const storyCard = document.createElement('div');
+                    storyCard.className = 'story-card';
+                    storyCard.innerHTML = `
+                        <div class="story-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="story-text">"${story.text}"</p>
+                        <p class="story-name">- ${story.name}</p>
+                    `;
+                    storiesContainer.appendChild(storyCard);
+                });
+                
+                // Render success stories in admin gallery
+                successStories.forEach(story => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <i class="fas fa-user fa-3x"></i>
+                        <div class="gallery-actions">
+                            <button class="btn btn-primary btn-sm edit-story" data-id="${story.id}">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-story" data-id="${story.id}">Delete</button>
+                        </div>
+                    `;
+                    storiesGallery.appendChild(galleryItem);
+                });
+                
+                // Add event listeners for edit and delete buttons
+                document.querySelectorAll('.edit-story').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const storyId = this.getAttribute('data-id');
+                        const story = successStories.find(s => s.id == storyId);
+                        
+                        if (story) {
+                            document.getElementById('story-form-title').textContent = 'Edit Success Story';
+                            document.getElementById('story-submit-btn').textContent = 'Update Story';
+                            document.getElementById('story-id').value = story.id;
+                            document.getElementById('story-name').value = story.name;
+                            document.getElementById('story-text').value = story.text;
+                            
+                            storyFormCard.style.display = 'block';
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-story').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const storyId = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to delete this success story?')) {
+                            successStories = successStories.filter(story => story.id != storyId);
+                            saveData('successStories', successStories);
+                            renderSuccessStories();
+                        }
+                    });
+                });
+            }
+            
+            // Render orders in admin panel
+            function renderOrders() {
+                const ordersTableBody = document.getElementById('orders-table-body');
+                
+                // Clear existing content
+                ordersTableBody.innerHTML = '';
+                
+                // Render orders in admin table
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    const statusClass = `status-${order.status}`;
+                    const statusText = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+                    
+                    row.innerHTML = `
+                        <td>#ORD-${order.id.toString().padStart(3, '0')}</td>
+                        <td>${order.customer}</td>
+                        <td>${new Date(order.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+                        <td>$${order.amount.toFixed(2)}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td class="action-buttons">
+                            <button class="btn btn-primary btn-sm edit-order" data-id="${order.id}">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-order" data-id="${order.id}">Delete</button>
+                        </td>
+                    `;
+                    ordersTableBody.appendChild(row);
+                });
+                
+                // Add event listeners for edit and delete buttons
+                document.querySelectorAll('.edit-order').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const orderId = this.getAttribute('data-id');
+                        const order = orders.find(o => o.id == orderId);
+                        
+                        if (order) {
+                            document.getElementById('edit-order-id').value = order.id;
+                            document.getElementById('edit-customer-name').value = order.customer;
+                            document.getElementById('edit-order-date').value = order.date;
+                            document.getElementById('edit-order-amount').value = order.amount;
+                            document.getElementById('edit-order-status').value = order.status;
+                            
+                            orderEditModal.style.display = 'flex';
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.delete-order').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const orderId = this.getAttribute('data-id');
+                        
+                        if (confirm('Are you sure you want to delete this order?')) {
+                            orders = orders.filter(order => order.id != orderId);
+                            saveData('orders', orders);
+                            renderOrders();
+                            updateStats();
+                        }
+                    });
+                });
+            }
+            
+            // Update dashboard statistics
+            function updateStats() {
+                document.getElementById('total-books').textContent = books.length;
+                document.getElementById('total-blogs').textContent = blogPosts.length;
+                document.getElementById('total-orders').textContent = orders.length;
+                
+                const totalRevenue = orders.reduce((sum, order) => sum + order.amount, 0);
+                document.getElementById('total-revenue').textContent = `$${totalRevenue.toFixed(2)}`;
+            }
+            
+            // Save data to localStorage
+            function saveData(key, data) {
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+            
+            // Initialize the application
+            init();
+        });
+    </script>
+</body>
+</html>
